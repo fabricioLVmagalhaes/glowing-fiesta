@@ -9,6 +9,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatNativeDateModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatToolbarModule
   ],
   exports: [
     MatButtonModule,
@@ -31,7 +33,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatNativeDateModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatToolbarModule
   ],
 })
 export class MaterialModule {}
