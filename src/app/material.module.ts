@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
 import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
+    MatTabsModule
   ],
   exports: [
     MatButtonModule,
@@ -36,6 +38,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
+    MatTabsModule
   ],
 })
 export class MaterialModule {}
