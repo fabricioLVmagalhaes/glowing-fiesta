@@ -46,11 +46,16 @@ export class TrainingService {
       date: new Date(),
       state: 'cancelled',
     });
+
     this.runningExercise = null;
     this.exerciseChanged.next(null);
   }
 
   getRunningExercise(): Exercise {
     return { ...this.runningExercise };
+  }
+
+  getExercises() {
+    return this.exercises.slice();
   }
 }
