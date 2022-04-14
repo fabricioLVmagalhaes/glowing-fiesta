@@ -41,6 +41,7 @@ export class TrainingService {
   }
 
   startExercise(selectedId: string) {
+    // this.db.doc('availableExercises/' + selectedId).update({lastSelected: new Date().toISOString()})
     this.runningExercise = this.availableExercises.find(
       (ex) => ex.id == selectedId
       );
@@ -79,8 +80,6 @@ export class TrainingService {
       .collection('finishedExercises')
       .valueChanges()
       .subscribe((exercises: Exercise[]) => {
-        console.log(exercises);
-
         this.finishedExercisesChanged.next(exercises);
     });
   }
