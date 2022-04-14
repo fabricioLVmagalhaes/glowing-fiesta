@@ -9,8 +9,8 @@ import { User } from './user.model';
   providedIn: 'root',
 })
 export class AuthService {
-  private user: User | null;
   authChange = new Subject<boolean>();
+  private isAuthenticated = false;
 
   constructor(private router: Router, private auth: AngularFireAuth) {}
 
@@ -18,7 +18,6 @@ export class AuthService {
     this.auth
       .createUserWithEmailAndPassword(authData.email, authData.password)
       .then((result) => {
-        console.log(result);
         this.authSuccessfuly();
       })
       .catch((error) => {
@@ -30,7 +29,6 @@ export class AuthService {
     this.auth
       .signInWithEmailAndPassword(authData.email, authData.password)
       .then((result) => {
-        console.log(result);
         this.authSuccessfuly();
       })
       .catch((error) => {
@@ -39,21 +37,17 @@ export class AuthService {
   }
 
   logout() {
-    this.user = null;
     this.authChange.next(false);
     this.router.navigate(['/login']);
-  }
-
-  getUser() {
-    return { ...this.user };
+    this.isAuthenticated = false;
   }
 
   isAuth() {
-    return this.user != null;
+    return this.isAuthenticated;
   }
 
   private authSuccessfuly() {
-    console.log('logando');
+    this.isAuthenticated = true;
 
     this.authChange.next(true);
     this.router.navigate(['/training']);
