@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AuthData } from './auth-data.model';
@@ -11,22 +12,30 @@ export class AuthService {
   private user: User | null;
   authChange = new Subject<boolean>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private auth: AngularFireAuth) {}
 
   registerUser(authData: AuthData) {
-    this.user = {
-      email: authData.email,
-      userId: Math.round(Math.random() * 1000).toString(),
-    };
-    this.authSuccessfuly();
+    this.auth
+      .createUserWithEmailAndPassword(authData.email, authData.password)
+      .then((result) => {
+        console.log(result);
+        this.authSuccessfuly();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   login(authData: AuthData) {
-    this.user = {
-      email: authData.email,
-      userId: Math.round(Math.random() * 1000).toString(),
-    };
-    this.authSuccessfuly();
+    this.auth
+      .signInWithEmailAndPassword(authData.email, authData.password)
+      .then((result) => {
+        console.log(result);
+        this.authSuccessfuly();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   logout() {
@@ -44,6 +53,8 @@ export class AuthService {
   }
 
   private authSuccessfuly() {
+    console.log('logando');
+
     this.authChange.next(true);
     this.router.navigate(['/training']);
   }
