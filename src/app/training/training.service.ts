@@ -94,9 +94,9 @@ export class TrainingService {
         .collection('finishedExercises')
         .valueChanges()
         .subscribe({
-          next: (exercises: Exercise[]) => {
+          next: ((exercises: Exercise[]) => {
             this.finishedExercisesChanged.next(exercises);
-          },
+          }),
         })
     );
   }
