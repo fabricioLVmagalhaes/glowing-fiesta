@@ -27,6 +27,7 @@
       <mat-error>Missing password</mat-error>
     </mat-form-field>
     <button
+      *ngIf="!(uiService.loadingStateChanged | async); else spiner"
       mat-raised-button
       color="primary"
       type="submit"
@@ -34,5 +35,6 @@
     >
       Submit
     </button>
+    <ng-template #spiner><mat-spinner></mat-spinner></ng-template>
   </form>
 </section>

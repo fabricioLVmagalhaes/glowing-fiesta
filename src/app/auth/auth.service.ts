@@ -1,3 +1,4 @@
+import { UIService } from './../shared/us.service';
 import { TrainingService } from './../training/training.service';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -18,7 +19,8 @@ export class AuthService {
     private router: Router,
     private auth: AngularFireAuth,
     private trainingService: TrainingService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private uiService: UIService
   ) {}
 
   initAuthListener() {
@@ -39,8 +41,10 @@ export class AuthService {
   }
 
   registerUser(authData: AuthData) {
+    this.uiService.loadingStateChanged.next(true);
     this.auth
       .createUserWithEmailAndPassword(authData.email, authData.password)
+      .finally(() => this.uiService.loadingStateChanged.next(false))
       .then((result) => {})
       .catch((error) => {
         this.snackBar.open(error.message, null, { duration: 3000 });
@@ -48,8 +52,10 @@ export class AuthService {
   }
 
   login(authData: AuthData) {
+    this.uiService.loadingStateChanged.next(true);
     this.auth
       .signInWithEmailAndPassword(authData.email, authData.password)
+      .finally(() => this.uiService.loadingStateChanged.next(false))
       .then((result) => {})
       .catch((error) => {
         this.snackBar.open(error.message, null, { duration: 3000 });

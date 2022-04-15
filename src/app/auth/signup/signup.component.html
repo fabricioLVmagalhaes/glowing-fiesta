@@ -55,10 +55,13 @@
       >Agree to Terms and Conditions.</mat-checkbox
     >
     <button
+      *ngIf="!(uiService.loadingStateChanged | async); else spiner"
       type="submit"
       mat-raised-button
       color="primary"
       [disabled]="f.invalid"
     >Submit</button>
+    <ng-template #spiner><mat-spinner></mat-spinner></ng-template>
+
   </form>
 </section>
