@@ -1,4 +1,4 @@
-import { UIService } from './../shared/us.service';
+import { UIService } from '../shared/ui.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Subject, Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';

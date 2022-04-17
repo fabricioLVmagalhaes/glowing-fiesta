@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { UIService } from './../../shared/us.service';
+import { UIService } from '../../shared/ui.service';
 import { AuthService } from './../auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';

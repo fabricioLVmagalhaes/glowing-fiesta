@@ -1,5 +1,5 @@
+import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Inject, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
