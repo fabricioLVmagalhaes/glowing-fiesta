@@ -4,11 +4,8 @@
       <mat-card-title fxLayoutAlign="center"
         >Time to satrt a workout!</mat-card-title
       >
-      <mat-card-content
-        fxLayoutAlign="center"
-      >
-        <mat-form-field
-        *ngIf="!loading; else spiner">
+      <mat-card-content fxLayoutAlign="center">
+        <mat-form-field *ngIf="!loading && exercises">
           <mat-label>Choose an option</mat-label>
           <mat-select
             placeholder="Choose excercise"
@@ -23,13 +20,26 @@
             >
           </mat-select>
         </mat-form-field>
+        <mat-spinner *ngIf="loading"></mat-spinner>
       </mat-card-content>
-      <mat-card-actions fxLayoutAlign="center"
-      *ngIf="!loading">
-        <button [disabled]="f.invalid" type="submit" mat-button>Start</button>
+      <mat-card-actions fxLayoutAlign="center" *ngIf="!loading">
+        <button
+          *ngIf="exercises"
+          [disabled]="f.invalid"
+          type="submit"
+          mat-button
+        >
+          Start
+        </button>
+        <button
+          *ngIf="!exercises"
+          (click)="fetchExercises()"
+          type="button"
+          mat-button
+        >
+          Fetch Again
+        </button>
       </mat-card-actions>
     </mat-card>
   </form>
 </section>
-
-<ng-template #spiner><mat-spinner></mat-spinner></ng-template>
