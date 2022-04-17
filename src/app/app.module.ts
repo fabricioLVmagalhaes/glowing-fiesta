@@ -32,7 +32,6 @@ import { WelcomeComponent } from './welcome/welcome.component';
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
     AuthModule,
-    TrainingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
