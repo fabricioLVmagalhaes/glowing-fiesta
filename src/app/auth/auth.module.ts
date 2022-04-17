@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 @NgModule({
   declarations: [SignupComponent, LoginComponent],
@@ -13,7 +14,8 @@ import { SignupComponent } from './signup/signup.component';
     MaterialModule,
     FormsModule,
     FlexLayoutModule,
+    AngularFireAuthModule
   ],
-  exports: [SignupComponent, LoginComponent],
+  exports: [],
 })
 export class AuthModule {}
