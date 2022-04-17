@@ -5,7 +5,8 @@ import { Subject } from 'rxjs';
 import { UIService } from '../shared/ui.service';
 import { TrainingService } from './../training/training.service';
 import { AuthData } from './auth-data.model';
-
+import { Store } from '@ngrx/store';
+import * as fromApp from '../app.reducer';
 @Injectable({
   providedIn: 'root',
 })
@@ -17,7 +18,8 @@ export class AuthService {
     private router: Router,
     private auth: AngularFireAuth,
     private trainingService: TrainingService,
-    private uiService: UIService
+    private uiService: UIService,
+    private store: Store<{ ui: fromApp.State }>
   ) {}
 
   initAuthListener() {
@@ -38,10 +40,11 @@ export class AuthService {
   }
 
   registerUser(authData: AuthData) {
-    this.uiService.loadingStateChanged.next(true);
+    // this.uiService.loadingStateChanged.next(true);
+    this.store.dispatch({ type: 'START_LOADING' });
     this.auth
       .createUserWithEmailAndPassword(authData.email, authData.password)
-      .finally(() => this.uiService.loadingStateChanged.next(false))
+      .finally(() => this.store.dispatch({ type: 'STOP_LOADING' }))
       .then((result) => {})
       .catch((error) => {
         this.uiService.showSnackBar(error.message, null, 3000);
@@ -49,12 +52,12 @@ export class AuthService {
   }
 
   login(authData: AuthData) {
+    this.store.dispatch({ type: 'START_LOADING' });
     this.uiService.loadingStateChanged.next(true);
     this.auth
       .signInWithEmailAndPassword(authData.email, authData.password)
       .finally(() => {
-        this.uiService.loadingStateChanged.next(false);
-
+        this.store.dispatch({ type: 'STOP_LOADING' });
       })
       .then((result) => {})
       .catch((error) => {
