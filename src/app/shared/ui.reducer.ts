@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { START_LOADING, STOP_LOADING } from './ui.actions';
+import { START_LOADING, STOP_LOADING, UIActions } from './ui.actions';
 
 
 export interface State {
@@ -10,7 +10,7 @@ const initialState: State = {
   isLoading: false,
 };
 
-export function uiReducer(state = initialState, action: Action): State {
+export function uiReducer(state = initialState, action: UIActions): State {
   switch (action.type) {
     case START_LOADING:
       return {

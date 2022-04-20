@@ -5,7 +5,7 @@ import { AuthService } from './../auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import * as fromApp from '../../app.reducer';
+import * as fromRoot from '../../app.reducer';
 
 @Component({
   selector: 'app-login',
@@ -19,15 +19,11 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     public uiService: UIService,
-    private store: Store<{ ui: fromApp.State }>
+    private store: Store<{ ui: fromRoot.State }>
   ) {}
 
   ngOnInit(): void {
-    this.isLoading$ = this.store.pipe(map((state) => state.ui.isLoading));
-    // this.store.subscribe((data) => console.log(data));
-    // this.uiService.loadingStateChanged.subscribe((isLoading) => {
-    //   this.isLoading = isLoading;
-    // });
+    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.loginForm = new FormGroup({
       email: new FormControl('', {
         validators: [Validators.required, Validators.email],

@@ -55,7 +55,7 @@
       >Agree to Terms and Conditions.</mat-checkbox
     >
     <button
-      *ngIf="!(uiService.loadingStateChanged | async); else spiner"
+      *ngIf="!(isLoading$ | async); else spiner"
       type="submit"
       mat-raised-button
       color="primary"
